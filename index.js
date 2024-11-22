@@ -10,8 +10,6 @@ const categories = require('./data/category');
 const {
   capitalizeFirstLetter,
   capitalizeWoHyphen,
-  sortByPriceAsc,
-  sortByPriceDesc,
 } = require('./utils');
 
 const app = express();
@@ -35,10 +33,10 @@ app.get('/hotels/sort/pricing', (req, res) => {
 
   if (pricing === 'low-to-high') {
     sortedHotels = hotels.slice().sort((a, b) => a.price - b.price);
-    res.json(sortedHotels);
+    res.json({ hotels: sortedHotels});
   } else if (pricing === 'high-to-low') {
     sortedHotels = hotels.slice().sort((a, b) => a.price - b.price);
-    res.json(sortedHotels);
+    res.json({ hotels: sortedHotels});
   } else {
     res.status(400).json({
       'invalid parameter for pricing': pricing,
@@ -55,10 +53,10 @@ app.get('/hotels/sort/rating', (req, res) => {
 
   if (rating === 'low-to-high') {
     sortedHotels = hotels.slice().sort((a, b) => a.rating - b.rating);
-    res.json(sortedHotels);
+    res.json({ hotels:sortedHotels});
   } else if (rating === 'high-to-low') {
     sortedHotels = hotels.slice().sort((a, b) => b.rating - a.rating);
-    res.json(sortedHotels);
+    res.json({ hotels:sortedHotels});
   } else {
     res.status(400).json({
       'invalid parameter for rating': rating,
@@ -75,10 +73,10 @@ app.get('/hotels/sort/reviews', (req, res) => {
 
   if (reviews === 'least-to-most') {
     sortedHotels = hotels.slice().sort((a, b) => a.reviews - b.reviews);
-    res.json(sortedHotels);
+    res.json({ hotels:sortedHotels});
   } else if (reviews === 'most-to-least') {
     sortedHotels = hotels.slice().sort((a, b) => b.reviews - a.reviews);
-    res.json(sortedHotels);
+    res.json({ hotels:sortedHotels});
   } else {
     res.status(400).json({
       'invalid parameter for reviews': reviews,
@@ -97,7 +95,7 @@ app.get('/hotels/filter/amenity', (req, res) => {
 
   if (amenities.includes(amenity)) {
     amenityFilteredHotels = hotels.filter((hotel) => hotel.amenity === amenity);
-    res.json(amenityFilteredHotels);
+    res.json({ hotels:amenityFilteredHotels});
   } else {
     res.status(400).json({
       'invalid parameter for amenity': amenity,
@@ -116,7 +114,7 @@ app.get('/hotels/filter/country', (req, res) => {
 
   if (countries.includes(country)) {
     countryFilteredHotels = hotels.filter((hotel) => hotel.country === country);
-    res.json(countryFilteredHotels);
+    res.json({ hotels:countryFilteredHotels});
   } else {
     res.status(400).json({
       'invalid parameter for country': country,
@@ -137,7 +135,7 @@ app.get('/hotels/filter/category', (req, res) => {
     categoryFilteredHotels = hotels.filter(
       (hotel) => hotel.category === category
     );
-    res.json(categoryFilteredHotels);
+    res.json({ hotels:categoryFilteredHotels});
   } else {
     res.status(400).json({
       'invalid parameter for category': category,
@@ -149,7 +147,7 @@ app.get('/hotels/filter/category', (req, res) => {
 // <http://localhost:3000/hotels>
 
 app.get('/hotels', (req, res) => {
-  res.json(hotels);
+  res.json({ hotels:hotels});
 });
 
 app.listen(port, () => {
