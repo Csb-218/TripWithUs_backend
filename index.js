@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
   console.log(hotels);
 });
 
+
 // API ENDPOINT 1
 // <http://localhost:3000/hotels/sort/pricing?pricing=low-to-high>
 
