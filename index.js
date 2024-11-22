@@ -14,7 +14,7 @@ const {
 
 const app = express();
 const port = 3010;
-
+ 
 app.use(cors());
 app.use(express.static('static'));
 
